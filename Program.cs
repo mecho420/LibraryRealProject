@@ -11,12 +11,82 @@ namespace LibraryRealProject
     {
         private string filePath = "BooksList.txt";
         List<Books> bookList = new List<Books>();
+        private static string menuActionChoice;
 
         static void Main(string[] args)
         {
             // Да може да чете кирилица
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
+
+            PrintMenu();
+
+            // MENU
+            while (true)
+            {
+                menuActionChoice = Console.ReadLine();
+                switch (menuActionChoice)
+                {
+                    case "1":
+                        ShowActionTitle("Добавяне на нова книга в библиотеката");
+                        AddNewBook();
+                        break;
+                    case "2":
+                        ShowActionTitle("Заемане на книга от читател");
+                        BorrowABook();
+                        break;
+                    case "3":
+                        ShowActionTitle("Връщане на книга от читател");
+                        ReturnABoook();
+                        break;
+                    case "4":
+                        ShowActionTitle("Справка за всички книги в библиотката");
+                        ReferenceForAllBooks();
+                        break;
+                    case "5":
+                        ShowActionTitle("Справка за заетите книги и техните наематели");
+                        ReferenceForAllBooksAndTheirTenants();
+                        break;
+                    case "x": 
+                    case "X":
+                        Exit();
+                        break;
+                    default:
+                        // todo: implement default case
+
+                        break;
+                }
+            }
+        }
+
+        private static void Exit()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void ReferenceForAllBooksAndTheirTenants()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void ReferenceForAllBooks()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void ReturnABoook()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void BorrowABook()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AddNewBook()
+        {
+            throw new NotImplementedException();
         }
 
         static void ReadData(string filePath)
@@ -31,6 +101,14 @@ namespace LibraryRealProject
                     Books book = new Books();
                 }
             }
+        }
+
+        private static void ShowActionTitle(string title)
+        {
+            Console.Clear();
+            AddLine();
+            Console.WriteLine("\t" + title);
+            AddLine();
         }
 
         private static void AddLine(int count = 1)
