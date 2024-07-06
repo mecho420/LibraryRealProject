@@ -12,7 +12,7 @@ namespace LibraryRealProject
     internal class Program
     {
         private string filePath = "BooksList.txt";
-        List<Books> bookList = new List<Books>();
+        private static List<Books> bookList = new List<Books>();
         private static string menuActionChoice;
 
         static void Main(string[] args)
@@ -86,7 +86,7 @@ namespace LibraryRealProject
             throw new NotImplementedException();
         }
 
-        private void AddNewBook()
+        private static void AddNewBook()
         {
             Console.Write("Код на книгата: ");
             int isbn = int.Parse(Console.ReadLine());
@@ -100,15 +100,24 @@ namespace LibraryRealProject
             string price = Console.ReadLine();
             try
             {
-                Books newBooks = new Books(isbn, title, author, year, price);
-                bookList.Add(newBooks);
-               
+                Books newBook = new Books(isbn, title, author, year, price);
+                bookList.Add(newBook);
+                ShowResultMessage($"Книгата{title} е добавена успешно");
+                Console.WriteLine(bookList);
             }
             catch (Exception)
             {
 
-                throw;
+                ShowResultMessage($"Въвели сте невалидни данни");
             }
+            BackToMenu();
+        }
+        private static void BackToMenu()
+        {
+            AddLine();
+            Console.Write("\tНатисни произвлен клавиш обратно към МЕНЮ: ");
+            Console.ReadLine();
+            PrintMenu();
         }
 
         private void ReadData(string filePath)
@@ -169,6 +178,11 @@ namespace LibraryRealProject
             Console.WriteLine("\t[x]: Изход от програмата");
             AddLine();
             Console.Write("\tВашият избор: ");
+        }
+        private static void ShowResultMessage(string message)
+        {
+            AddLine();
+            Console.WriteLine("\t" + message);
         }
     }
 }
