@@ -89,7 +89,7 @@ namespace LibraryRealProject
             throw new NotImplementedException();
         }
 
-        void ReadData(string filePath)
+        static void ReadData(string filePath)
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
             using (reader)
