@@ -10,7 +10,8 @@ namespace LibraryRealProject
     {
         private bool booksAvailable;
         private double price;
-        
+        private string author;
+        private bool availability;
 
         public int isbn { get; private set; }
         public string title { get; private set; }
@@ -28,9 +29,6 @@ namespace LibraryRealProject
                 booksAvailable = string.IsNullOrEmpty(borrower);
             }
         }
-    
-    
-        
        
         public double Price
         {
@@ -47,10 +45,7 @@ namespace LibraryRealProject
             }
         }
 
-
-       
-
-        public Books(int isbn, string title, int year, string borrower)
+        public Books(int isbn, string title, string author, int year, double price, string borrower)
         {
             this.isbn = isbn;
             this.title = title;
@@ -63,10 +58,20 @@ namespace LibraryRealProject
         {
         }
 
+        public Books(int isbn, string title, string author, int year, double price, bool availability, string borrower)
+        {
+            this.isbn = isbn;
+            this.title = title;
+            this.author = author;
+            this.year = year;
+            this.price = price;
+            this.availability = availability;
+            this.borrower = borrower;
+        }
+
         public override string ToString()
         {
             return $"{isbn},{title},{year.ToString()},{borrower},{booksAvailable}";
         }
-
     }
 }
