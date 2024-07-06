@@ -86,7 +86,8 @@ namespace LibraryRealProject
 
         private static void AddNewBook()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Код на книгата: ");
+            int isbn = Console.ReadLine();
         }
 
         static void ReadData(string filePath)
