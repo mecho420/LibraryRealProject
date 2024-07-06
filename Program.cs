@@ -32,5 +32,32 @@ namespace LibraryRealProject
                 }
             }
         }
+
+        private static void AddLine(int count = 1)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(Environment.NewLine);
+            }
+        }
+
+        private static void PrintMenu()
+        {
+            Console.Clear();
+
+            AddLine();
+            Console.WriteLine("\tМ Е Н Ю");
+            AddLine();
+            Console.WriteLine("\tМоля изберете желаното действие:");
+            AddLine();
+            Console.WriteLine("\t[1]: Добавяне на нова книга в библиотеката");
+            Console.WriteLine("\t[2]: Заемане на книга от читател");
+            Console.WriteLine("\t[3]: Връщане на книга от читател");
+            Console.WriteLine("\t[4]: Справка за всички книги в библиотката");
+            Console.WriteLine("\t[5]: Справка за заетите книги и техните наематели");
+            Console.WriteLine("\t[x]: Изход от програмата");
+            AddLine();
+            Console.Write("\tВашият избор: ");
+        }
     }
 }
