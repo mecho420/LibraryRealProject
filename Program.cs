@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -89,7 +91,7 @@ namespace LibraryRealProject
             throw new NotImplementedException();
         }
 
-        static void ReadData(string filePath)
+        private void ReadData(string filePath)
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
             using (reader)
@@ -99,6 +101,17 @@ namespace LibraryRealProject
                 {
                     string[] bookInfo = line.Split(',');
                     Books book = new Books();
+
+                    int isbn = int.Parse(bookInfo[0]);
+                    string title = bookInfo[1];
+                    string author = bookInfo[2];
+                    int year = int.Parse(bookInfo[3]);
+                    double price = double.Parse(bookInfo[4]);
+                    bool availability = bool.Parse(bookInfo[5]);
+                    string borrower = bookInfo[6];
+
+                    Books currentBook = new Books(isbn, title, author, year, price, availability, borrower);
+                    bookList.Add(currentBook);
                 }
             }
         }
