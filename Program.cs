@@ -86,10 +86,29 @@ namespace LibraryRealProject
             throw new NotImplementedException();
         }
 
-        private static void AddNewBook()
+        private void AddNewBook()
         {
-            Console.WriteLine("Код на книгата: ");
-            int isbn = Console.ReadLine();
+            Console.Write("Код на книгата: ");
+            int isbn = int.Parse(Console.ReadLine());
+            Console.Write("Заглавие на книгата: ");
+            string title = Console.ReadLine();
+            Console.Write("Автор на книгата: ");
+            string author = Console.ReadLine();
+            Console.WriteLine("Година на издаване: ");
+            string year = Console.ReadLine();
+            Console.WriteLine("Цена на книгата: ");
+            string price = Console.ReadLine();
+            try
+            {
+                Books newBooks = new Books(isbn, title, author, year, price);
+                bookList.Add(newBooks);
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void ReadData(string filePath)

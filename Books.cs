@@ -69,6 +69,17 @@ namespace LibraryRealProject
             this.borrower = borrower;
         }
 
+        public Books(int isbn, string title, string author, string year1)
+        {
+            this.isbn = isbn;
+            this.title = title;
+            this.author = author;
+        }
+
+        public Books(int isbn, string title, string author, string year1, string price1) : this(isbn, title, author, year1)
+        {
+        }
+
         public override string ToString()
         {
             return $"{isbn},{title},{year.ToString()},{borrower},{booksAvailable}";
