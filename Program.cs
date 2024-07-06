@@ -61,7 +61,7 @@ namespace LibraryRealProject
 
         private static void Exit()
         {
-            throw new NotImplementedException();
+            Environment.Exit(0);
         }
 
         private static void ReferenceForAllBooksAndTheirTenants()
