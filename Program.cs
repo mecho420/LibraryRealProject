@@ -102,6 +102,7 @@ namespace LibraryRealProject
             {
                 Books newBook = new Books(isbn, title, author, year, price);
                 bookList.Add(newBook);
+                WriteData();
                 ShowResultMessage($"Книгата{title} е добавена успешно");
                 Console.WriteLine(bookList);
             }
