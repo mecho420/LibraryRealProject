@@ -22,6 +22,7 @@ namespace LibraryRealProject
             Console.OutputEncoding = Encoding.Unicode;
 
             PrintMenu();
+           
 
             // MENU
             while (true)
@@ -132,7 +133,7 @@ namespace LibraryRealProject
                 }
             }
         }
-        private void ReadData(string filePath)
+        private static void ReadData(string filePath)
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
             using (reader)
@@ -141,7 +142,7 @@ namespace LibraryRealProject
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] bookInfo = line.Split(',');
-                    Books book = new Books();
+                   
 
                     int isbn = int.Parse(bookInfo[0]);
                     string title = bookInfo[1];
