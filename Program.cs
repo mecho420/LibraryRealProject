@@ -11,7 +11,7 @@ namespace LibraryRealProject
 {
     internal class Program
     {
-        private string filePath = "BooksList.txt";
+        private const string filePath = "BooksList.txt";
         private static List<Books> bookList = new List<Books>();
         private static string menuActionChoice;
 
@@ -78,7 +78,7 @@ namespace LibraryRealProject
 
         private static void ReturnABoook()
         {
-            throw new NotImplementedException();
+            
         }
 
         private static void BorrowABook()
@@ -94,9 +94,9 @@ namespace LibraryRealProject
             string title = Console.ReadLine();
             Console.Write("Автор на книгата: ");
             string author = Console.ReadLine();
-            Console.WriteLine("Година на издаване: ");
+            Console.Write("Година на издаване: ");
             string year = Console.ReadLine();
-            Console.WriteLine("Цена на книгата: ");
+            Console.Write("Цена на книгата: ");
             string price = Console.ReadLine();
             try
             {
@@ -120,6 +120,17 @@ namespace LibraryRealProject
             PrintMenu();
         }
 
+        private static void WriteData()
+        {
+            StreamWriter writer = new StreamWriter(filePath, false, Encoding.Unicode);
+            using (writer)
+            {
+                foreach (Books book in bookList)
+                {
+                    writer.WriteLine(bookList);
+                }
+            }
+        }
         private void ReadData(string filePath)
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
