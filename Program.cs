@@ -22,6 +22,7 @@ namespace LibraryRealProject
             Console.OutputEncoding = Encoding.Unicode;
 
             PrintMenu();
+            ReadData();
 
 
             // MENU
@@ -59,6 +60,8 @@ namespace LibraryRealProject
 
                         break;
                 }
+
+                BackToMenu();
             }
         }
 
@@ -84,7 +87,31 @@ namespace LibraryRealProject
 
         private static void BorrowABook()
         {
-            throw new NotImplementedException();
+            Console.Write("Въведете isbn на книгата: ");
+
+            int inputIsbn = int.Parse(Console.ReadLine());
+            Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn );
+            if (bookToBorrow != null)
+            {
+                if (bookToBorrow.Availability == false)
+                {
+                    Console.WriteLine("Книгата е заета.");
+                    return;
+
+                }
+                bookToBorrow.Availability = false;
+                Console.Write("Въведете име: ");
+                bookToBorrow.borrower = Console.ReadLine();
+                Console.WriteLine("Книгита е заета успешно");
+                WriteData();
+
+                
+            }
+            else
+            {
+                Console.WriteLine("Няма такава книга!");
+            }
+
         }
         public bool IsBookInLibrary(string title)
         {
@@ -117,13 +144,13 @@ namespace LibraryRealProject
                 newBook.author = author;
                 newBook.year = year;
                 newBook.Price = price;
-                newBook.borrower = "";
+                newBook.borrower = "-";
                 newBook.title = title;
-                newBook.BooksAvailable = true;
+                newBook.Availability = true;
                 bookList.Add(newBook);
                 WriteData();
                 ShowResultMessage($"Книгата {title} е добавена успешно");
-                Console.WriteLine(String.Join(" ", bookList));
+                Console.WriteLine(newBook);
                 Console.WriteLine(price);
             }
             catch (Exception)
@@ -152,7 +179,7 @@ namespace LibraryRealProject
                 }
             }
         }
-        private static void ReadData(string filePath)
+        private static void ReadData()
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
             using (reader)
@@ -175,7 +202,7 @@ namespace LibraryRealProject
                     book.author = bookInfo[2];
                     book.year = int.Parse(bookInfo[3]);
                     book.Price = double.Parse(bookInfo[4]);
-                    book.BooksAvailable = bool.Parse(bookInfo[5]);
+                    book.Availability = bool.Parse(bookInfo[5]);
                     book.borrower = bookInfo[6];
 
 
@@ -198,6 +225,7 @@ namespace LibraryRealProject
             {
                 Console.WriteLine(Environment.NewLine);
             }
+
         }
 
         private static void PrintMenu()

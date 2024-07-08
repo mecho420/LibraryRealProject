@@ -8,7 +8,6 @@ namespace LibraryRealProject
 {
     internal class Books
     {
-        private bool booksAvailable;
         private double price;
         public string author;
         private bool availability;
@@ -18,7 +17,7 @@ namespace LibraryRealProject
         public int year { get;  set; }
 
         public string borrower { get;  set; }
-        public bool BooksAvailable
+        public bool Availability
         {
             get
             {
@@ -26,7 +25,7 @@ namespace LibraryRealProject
             }
              set
             {
-                booksAvailable = value;
+                availability = value;
             }
         }
        
@@ -55,7 +54,7 @@ namespace LibraryRealProject
             this.title = title;
             this.year = year;
             this.borrower = borrower;
-            this.booksAvailable = true;
+            this.Availability = true;
         }
 
         public Books()
@@ -86,7 +85,7 @@ namespace LibraryRealProject
 
         public override string ToString()
         {
-            return $"{isbn},{title},{author},{year},{this.Price},{booksAvailable},{borrower}";
+            return $"{isbn},{title},{author},{year},{this.price},{availability},{borrower}";
         }
     }
 }
