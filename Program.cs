@@ -83,7 +83,16 @@ namespace LibraryRealProject
 
         private static void BorrowABook()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Моля изберете книга: ");
+            Console.WriteLine(bookList);
+            Console.WriteLine("Моля, въведете заглавието на книгата: ");
+            string chosenBook = Console.ReadLine();
+
+            if (!bookList.Contains(chosenBook)) 
+            {
+                Console.WriteLine("Моля, въведете книга от списъка!");
+                
+            }
         }
 
         private static void AddNewBook()
