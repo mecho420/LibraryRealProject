@@ -95,6 +95,7 @@ namespace LibraryRealProject
                 bookToBorrow.Availability = true;
                 Console.WriteLine("Книгита е върната успешно.");
                 bookToBorrow.borrower = "-";
+                WriteData();
             }
         }
 
