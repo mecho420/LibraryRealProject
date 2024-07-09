@@ -82,7 +82,17 @@ namespace LibraryRealProject
 
         private static void ReturnABoook()
         {
-
+            Console.WriteLine("Моля изберете книга за връщане: ");
+            int inputIsbn = int.Parse(Console.ReadLine());
+            Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn);
+            if (bookToBorrow == null)
+            {
+                if (bookToBorrow.Availability == true)
+                {
+                    Console.WriteLine("Книгата е върната.");
+                    return;
+                }
+            }
         }
 
         private static void BorrowABook()
@@ -97,7 +107,6 @@ namespace LibraryRealProject
                 {
                     Console.WriteLine("Книгата е заета.");
                     return;
-
                 }
                 bookToBorrow.Availability = false;
                 Console.Write("Въведете име: ");
@@ -190,13 +199,6 @@ namespace LibraryRealProject
                     string[] bookInfo = line.Split(',');
 
                     Books book = new Books();
-                    /*int isbn = int.Parse(bookInfo[0]);
-                    string title = bookInfo[1];
-                    string author = bookInfo[2];
-                    int year = int.Parse(bookInfo[3]);
-                    double price = double.Parse(bookInfo[4]);
-                    bool availability = bool.Parse(bookInfo[5]);
-                    string borrower = bookInfo[6];*/
                     book.isbn = int.Parse(bookInfo[0]);
                     book.title = bookInfo[1];
                     book.author = bookInfo[2];
@@ -204,7 +206,6 @@ namespace LibraryRealProject
                     book.Price = double.Parse(bookInfo[4]);
                     book.Availability = bool.Parse(bookInfo[5]);
                     book.borrower = bookInfo[6];
-
 
                     bookList.Add(book);
                 }
