@@ -8,25 +8,24 @@ namespace LibraryRealProject
 {
     internal class Books
     {
-        private bool booksAvailable;
         private double price;
-        private string author;
+        public string author;
         private bool availability;
 
-        public int isbn { get; private set; }
-        public string title { get; private set; }
-        public int year { get; private set; }
+        public int isbn { get;  set; }
+        public string title { get;  set; }
+        public int year { get;  set; }
 
-        public string borrower { get; private set; }
-        public bool BooksAvailable
+        public string borrower { get;  set; }
+        public bool Availability
         {
             get
             {
-                return string.IsNullOrEmpty(borrower);
+                return availability;
             }
-            private set
+             set
             {
-                booksAvailable = string.IsNullOrEmpty(borrower);
+                availability = value;
             }
         }
        
@@ -36,11 +35,15 @@ namespace LibraryRealProject
             {
                 return price;
             }
-            private set
+             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentException("Цената на книгата трябва да е  положително число!");
+                }
+                else
+                {
+                    price= value;
                 }
             }
         }
@@ -51,7 +54,7 @@ namespace LibraryRealProject
             this.title = title;
             this.year = year;
             this.borrower = borrower;
-            this.booksAvailable = string.IsNullOrEmpty(borrower);
+            this.Availability = true;
         }
 
         public Books()
@@ -82,7 +85,7 @@ namespace LibraryRealProject
 
         public override string ToString()
         {
-            return $"{isbn},{title},{year.ToString()},{borrower},{booksAvailable}";
+            return $"{isbn},{title},{author},{year},{this.price},{availability},{borrower}";
         }
     }
 }

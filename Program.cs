@@ -11,7 +11,7 @@ namespace LibraryRealProject
 {
     internal class Program
     {
-        private const string filePath = "BooksList.txt";
+        private const string filePath = "../../BooksList.txt";
         private static List<Books> bookList = new List<Books>();
         private static string menuActionChoice;
 
@@ -22,6 +22,8 @@ namespace LibraryRealProject
             Console.OutputEncoding = Encoding.Unicode;
 
             PrintMenu();
+            ReadData();
+
 
             // MENU
             while (true)
@@ -49,7 +51,7 @@ namespace LibraryRealProject
                         ShowActionTitle("Справка за заетите книги и техните наематели");
                         ReferenceForAllBooksAndTheirTenants();
                         break;
-                    case "x": 
+                    case "x":
                     case "X":
                         Exit();
                         break;
@@ -58,6 +60,8 @@ namespace LibraryRealProject
 
                         break;
                 }
+
+                BackToMenu();
             }
         }
 
@@ -78,23 +82,49 @@ namespace LibraryRealProject
 
         private static void ReturnABoook()
         {
-            
+
         }
 
         private static void BorrowABook()
         {
-            Console.WriteLine("Моля изберете книга: ");
-            Console.WriteLine(bookList);
-            Console.WriteLine("Моля, въведете заглавието на книгата: ");
-            string chosenBook = Console.ReadLine();
+            Console.Write("Въведете isbn на книгата: ");
 
-            if (!bookList.Contains(chosenBook)) 
+            int inputIsbn = int.Parse(Console.ReadLine());
+            Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn );
+            if (bookToBorrow != null)
             {
-                Console.WriteLine("Моля, въведете книга от списъка!");
+                if (bookToBorrow.Availability == false)
+                {
+                    Console.WriteLine("Книгата е заета.");
+                    return;
+
+                }
+                bookToBorrow.Availability = false;
+                Console.Write("Въведете име: ");
+                bookToBorrow.borrower = Console.ReadLine();
+                Console.WriteLine("Книгита е заета успешно");
+                WriteData();
+
                 
             }
-        }
+            else
+            {
+                Console.WriteLine("Няма такава книга!");
+            }
 
+        }
+        public bool IsBookInLibrary(string title)
+        {
+            foreach (var book in bookList)
+            {
+                if (book.title.Equals(title, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true; // Book found
+                }
+
+            }
+            return false; // Book not found
+        }
         private static void AddNewBook()
         {
             Console.Write("Код на книгата: ");
@@ -104,16 +134,24 @@ namespace LibraryRealProject
             Console.Write("Автор на книгата: ");
             string author = Console.ReadLine();
             Console.Write("Година на издаване: ");
-            string year = Console.ReadLine();
+            int year = int.Parse(Console.ReadLine());
             Console.Write("Цена на книгата: ");
-            string price = Console.ReadLine();
+            double price = double.Parse(Console.ReadLine());
             try
             {
-                Books newBook = new Books(isbn, title, author, year, price);
+                Books newBook = new Books();//ako ne e null da e ""
+                newBook.isbn = isbn;
+                newBook.author = author;
+                newBook.year = year;
+                newBook.Price = price;
+                newBook.borrower = "-";
+                newBook.title = title;
+                newBook.Availability = true;
                 bookList.Add(newBook);
                 WriteData();
-                ShowResultMessage($"Книгата{title} е добавена успешно");
-                Console.WriteLine(bookList);
+                ShowResultMessage($"Книгата {title} е добавена успешно");
+                Console.WriteLine(newBook);
+                Console.WriteLine(price);
             }
             catch (Exception)
             {
@@ -137,11 +175,11 @@ namespace LibraryRealProject
             {
                 foreach (Books book in bookList)
                 {
-                    writer.WriteLine(bookList);
+                    writer.WriteLine(book.ToString());
                 }
             }
         }
-        private void ReadData(string filePath)
+        private static void ReadData()
         {
             StreamReader reader = new StreamReader(filePath, Encoding.Unicode);
             using (reader)
@@ -150,18 +188,25 @@ namespace LibraryRealProject
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] bookInfo = line.Split(',');
-                    Books book = new Books();
 
-                    int isbn = int.Parse(bookInfo[0]);
+                    Books book = new Books();
+                    /*int isbn = int.Parse(bookInfo[0]);
                     string title = bookInfo[1];
                     string author = bookInfo[2];
                     int year = int.Parse(bookInfo[3]);
                     double price = double.Parse(bookInfo[4]);
                     bool availability = bool.Parse(bookInfo[5]);
-                    string borrower = bookInfo[6];
+                    string borrower = bookInfo[6];*/
+                    book.isbn = int.Parse(bookInfo[0]);
+                    book.title = bookInfo[1];
+                    book.author = bookInfo[2];
+                    book.year = int.Parse(bookInfo[3]);
+                    book.Price = double.Parse(bookInfo[4]);
+                    book.Availability = bool.Parse(bookInfo[5]);
+                    book.borrower = bookInfo[6];
 
-                    Books currentBook = new Books(isbn, title, author, year, price, availability, borrower);
-                    bookList.Add(currentBook);
+
+                    bookList.Add(book);
                 }
             }
         }
@@ -180,6 +225,7 @@ namespace LibraryRealProject
             {
                 Console.WriteLine(Environment.NewLine);
             }
+
         }
 
         private static void PrintMenu()
