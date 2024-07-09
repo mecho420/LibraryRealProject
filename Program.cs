@@ -117,8 +117,6 @@ namespace LibraryRealProject
                 bookToBorrow.borrower = Console.ReadLine();
                 Console.WriteLine("Книгита е заета успешно");
                 WriteData();
-
-                
             }
             else
             {
