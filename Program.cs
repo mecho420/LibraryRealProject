@@ -82,8 +82,8 @@ namespace LibraryRealProject
 
         private static void ReturnABoook()
         {
-            Console.WriteLine("Моля изберете книга за връщане: ");
-            int inputIsbn = int.Parse(Console.ReadLine());
+            Console.WriteLine("Моля изберете книга(isbn) за връщане: ");
+            string inputIsbn = Console.ReadLine();
             Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn);
             if (bookToBorrow == null)
             {
@@ -99,7 +99,7 @@ namespace LibraryRealProject
         {
             Console.Write("Въведете isbn на книгата: ");
 
-            int inputIsbn = int.Parse(Console.ReadLine());
+            string inputIsbn = Console.ReadLine();
             Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn );
             if (bookToBorrow != null)
             {
@@ -137,7 +137,7 @@ namespace LibraryRealProject
         private static void AddNewBook()
         {
             Console.Write("Код на книгата: ");
-            int isbn = int.Parse(Console.ReadLine());
+            string isbn = Console.ReadLine();
             Console.Write("Заглавие на книгата: ");
             string title = Console.ReadLine();
             Console.Write("Автор на книгата: ");
@@ -199,7 +199,7 @@ namespace LibraryRealProject
                     string[] bookInfo = line.Split(',');
 
                     Books book = new Books();
-                    book.isbn = int.Parse(bookInfo[0]);
+                    book.isbn = bookInfo[0];
                     book.title = bookInfo[1];
                     book.author = bookInfo[2];
                     book.year = int.Parse(bookInfo[3]);

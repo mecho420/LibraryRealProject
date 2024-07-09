@@ -12,7 +12,7 @@ namespace LibraryRealProject
         public string author;
         private bool availability;
 
-        public int isbn { get;  set; }
+        public string isbn { get;  set; }
         public string title { get;  set; }
         public int year { get;  set; }
 
@@ -48,7 +48,7 @@ namespace LibraryRealProject
             }
         }
 
-        public Books(int isbn, string title, string author, int year, double price, string borrower)
+        public Books(string isbn, string title, string author, int year, double price, string borrower)
         {
             this.isbn = isbn;
             this.title = title;
@@ -61,7 +61,7 @@ namespace LibraryRealProject
         {
         }
 
-        public Books(int isbn, string title, string author, int year, double price, bool availability, string borrower)
+        public Books(string isbn, string title, string author, int year, double price, bool availability, string borrower)
         {
             this.isbn = isbn;
             this.title = title;
@@ -72,14 +72,14 @@ namespace LibraryRealProject
             this.borrower = borrower;
         }
 
-        public Books(int isbn, string title, string author, string year1)
+        public Books(string isbn, string title, string author, string year1)
         {
             this.isbn = isbn;
             this.title = title;
             this.author = author;
         }
 
-        public Books(int isbn, string title, string author, string year1, string price1) : this(isbn, title, author, year1)
+        public Books(string isbn, string title, string author, string year1, string price1) : this(isbn, title, author, year1)
         {
         }
 
