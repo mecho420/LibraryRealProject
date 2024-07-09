@@ -92,6 +92,9 @@ namespace LibraryRealProject
                     Console.WriteLine("Книгата е върната.");
                     return;
                 }
+                bookToBorrow.Availability = true;
+                Console.WriteLine("Книгита е върната успешно.");
+                bookToBorrow.borrower = "-";
             }
         }
 
@@ -113,8 +116,6 @@ namespace LibraryRealProject
                 bookToBorrow.borrower = Console.ReadLine();
                 Console.WriteLine("Книгита е заета успешно");
                 WriteData();
-
-                
             }
             else
             {
