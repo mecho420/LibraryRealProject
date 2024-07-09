@@ -45,11 +45,11 @@ namespace LibraryRealProject
                         break;
                     case "4":
                         ShowActionTitle("Справка за всички книги в библиотката");
-                        ReferenceForAllBooks();
+                        ReferenceForAllAvailiableBooks();
                         break;
                     case "5":
                         ShowActionTitle("Справка за заетите книги и техните наематели");
-                        ReferenceForAllBooksAndTheirTenants();
+                        ReferenceForAllUnavailiableBooksAndTheirTenants();
                         break;
                     case "x":
                     case "X":
@@ -70,14 +70,20 @@ namespace LibraryRealProject
             Environment.Exit(0);
         }
 
-        private static void ReferenceForAllBooksAndTheirTenants()
+        private static void ReferenceForAllUnavailiableBooksAndTheirTenants()
         {
             throw new NotImplementedException();
         }
 
-        private static void ReferenceForAllBooks()
+        private static void ReferenceForAllAvailiableBooks()
         {
-            throw new NotImplementedException();
+            List<Books> availiableBooks = new List<Books>();
+            Books books = new Books();
+            if (books.Availability == true)
+            {
+                availiableBooks.Add(books);
+                Console.WriteLine(availiableBooks);
+            }
         }
 
         private static void ReturnABoook()
