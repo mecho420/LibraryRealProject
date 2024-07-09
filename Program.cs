@@ -85,13 +85,17 @@ namespace LibraryRealProject
             Console.WriteLine("Моля изберете книга(isbn) за връщане: ");
             string inputIsbn = Console.ReadLine();
             Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn);
-            if (bookToBorrow == null)
+            if (bookToBorrow != null)
             {
                 if (bookToBorrow.Availability == true)
                 {
                     Console.WriteLine("Книгата е върната.");
                     return;
                 }
+                bookToBorrow.Availability = true;
+                bookToBorrow.borrower = "-";
+                Console.WriteLine("Книгита е върната успешно");
+                WriteData();
             }
         }
 
