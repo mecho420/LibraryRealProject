@@ -125,6 +125,8 @@ namespace LibraryRealProject
                 }
                 bookToBorrow.Availability = false;
                 Console.Write("Въведете име: ");
+                string name = bookToBorrow.Borrower = Console.ReadLine();
+                CheckingBorrowersLength(name);
                 bookToBorrow.Borrower = Console.ReadLine();
                 Console.WriteLine("Книгита е заета успешно");
                 WriteData();
@@ -266,7 +268,7 @@ namespace LibraryRealProject
             Console.WriteLine("\t" + message);
         }
 
-        public void CheckingBorrowersLength(string borrower)
+        private static void CheckingBorrowersLength(string borrower)
         {
             if (borrower.Length <= 2)
             {

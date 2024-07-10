@@ -17,6 +17,9 @@ namespace LibraryRealProject
         public int year { get;  set; }
 
         public string Borrower { get;  set; }
+
+       
+        
         public bool Availability
         {
             get
