@@ -6,12 +6,16 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace LibraryRealProject
 {
     internal class Program
     {
         private const string filePath = "../../BooksList.txt";
+        private static string soundFilePath = "../../enchantingsound.wav";
+        private static string soundFilePath2 = "../../villagerHit.wav";
+        private static string soundFilePath3 = "../../tnt-explosion";
         private static List<Books> bookList = new List<Books>();
         private static string menuActionChoice;
 
@@ -29,34 +33,44 @@ namespace LibraryRealProject
             while (true)
             {
                 menuActionChoice = Console.ReadLine();
+
                 switch (menuActionChoice)
                 {
                     case "1":
+
                         ShowActionTitle("Добавяне на нова книга в библиотеката");
+                        PlayEnchantingSound();
                         AddNewBook();
                         break;
                     case "2":
                         ShowActionTitle("Заемане на книга от читател");
+                        PlayEnchantingSound();
                         BorrowABook();
                         break;
                     case "3":
                         ShowActionTitle("Връщане на книга от читател");
+                        PlayEnchantingSound();
                         ReturnABoook();
                         break;
                     case "4":
                         ShowActionTitle("Справка за всички книги в библиотката");
+                        PlayEnchantingSound();
                         ReferenceForAllAvailiableBooks();
                         break;
                     case "5":
                         ShowActionTitle("Справка за заетите книги и техните наематели");
+                        PlayEnchantingSound();
                         ReferenceForAllUnavailiableBooksAndTheirTenants();
                         break;
                     case "x":
                     case "X":
+                        PlayexplosionSound();
                         Exit();
                         break;
                     default:
-                        // todo: implement default case
+                        ShowActionTitle("Въведете валидна опция!");
+                        PlayAngrySound();
+                        BackToMenu();
 
                         break;
                 }
@@ -101,11 +115,13 @@ namespace LibraryRealProject
                 if (bookToBorrow.Availability == true)
                 {
                     Console.WriteLine("Книгата е върната.");
+                    PlayAngrySound();
                     return;
                 }
                 bookToBorrow.Availability = true;
                 bookToBorrow.Borrower = "-";
                 Console.WriteLine("Книгита е върната успешно");
+                PlayEnchantingSound();
                 WriteData();
             }
         }
@@ -115,12 +131,13 @@ namespace LibraryRealProject
             Console.Write("Въведете isbn на книгата: ");
 
             string inputIsbn = Console.ReadLine();
-            Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn );
+            Books bookToBorrow = bookList.Find(b => b.isbn == inputIsbn);
             if (bookToBorrow != null)
             {
                 if (bookToBorrow.Availability == false)
                 {
                     Console.WriteLine("Книгата е заета.");
+                    PlayAngrySound();
                     return;
                 }
                 bookToBorrow.Availability = false;
@@ -129,11 +146,13 @@ namespace LibraryRealProject
                 CheckingBorrowersLength(name);
                 bookToBorrow.Borrower = Console.ReadLine();
                 Console.WriteLine("Книгита е заета успешно");
+                PlayEnchantingSound();
                 WriteData();
             }
             else
             {
                 Console.WriteLine("Няма такава книга!");
+                PlayAngrySound();
             }
 
         }
@@ -151,36 +170,45 @@ namespace LibraryRealProject
         }
         private static void AddNewBook()
         {
-            Console.Write("Код на книгата: ");
-            string isbn = Console.ReadLine();
-            Console.Write("Заглавие на книгата: ");
-            string title = Console.ReadLine();
-            Console.Write("Автор на книгата: ");
-            string author = Console.ReadLine();
-            Console.Write("Година на издаване: ");
-            int year = int.Parse(Console.ReadLine());
-            Console.Write("Цена на книгата: ");
-            decimal price = decimal.Parse(Console.ReadLine());
-            try
+            while (true)
             {
-                Books newBook = new Books();//ako ne e null da e ""
-                newBook.isbn = isbn;
-                newBook.author = author;
-                newBook.year = year;
-                newBook.Price = price;
-                newBook.Borrower = "-";
-                newBook.title = title;
-                newBook.Availability = true;
-                bookList.Add(newBook);
-                WriteData();
-                ShowResultMessage($"Книгата {title} е добавена успешно");
-                Console.WriteLine(newBook);
-                Console.WriteLine(price);
-            }
-            catch (Exception)
-            {
+                Console.Write("Код на книгата: ");
+                string isbn = Console.ReadLine();
+                Console.Write("Заглавие на книгата: ");
+                string title = Console.ReadLine();
+                Console.Write("Автор на книгата: ");
+                string author = Console.ReadLine();
+                Console.Write("Година на издаване: ");
+                string year = Console.ReadLine();
+                Console.Write("Цена на книгата: ");
+                string price = Console.ReadLine();
 
-                ShowResultMessage($"Въвели сте невалидни данни");
+
+
+                try
+                {
+                    Books newBook = new Books();//ako ne e null da e ""
+                    newBook.isbn = isbn;
+                    newBook.author = author;
+                    newBook.year = int.Parse(year);
+                    newBook.Price = decimal.Parse(price);
+                    newBook.Borrower = "-";
+                    newBook.title = title;
+                    newBook.Availability = true;
+                    bookList.Add(newBook);
+                    WriteData();
+                    ShowResultMessage($"Книгата {title} е добавена успешно");
+                    PlayEnchantingSound();
+                    Console.WriteLine(newBook);
+                    Console.WriteLine(price);
+                    break;
+                }
+                catch (Exception)
+                {
+
+                    ShowResultMessage($"Въвели сте невалидни данни");
+                    PlayAngrySound();
+                }
             }
             BackToMenu();
         }
@@ -190,6 +218,21 @@ namespace LibraryRealProject
             Console.Write("\tНатисни произвлен клавиш обратно към МЕНЮ: ");
             Console.ReadLine();
             PrintMenu();
+        }
+        private static void PlayEnchantingSound()
+        {
+            SoundPlayer player = new SoundPlayer(soundFilePath);
+            player.PlaySync();
+        }
+        private static void PlayexplosionSound()
+        {
+            SoundPlayer player = new SoundPlayer(soundFilePath3);
+            player.PlaySync();
+        }
+        private static void PlayAngrySound()
+        {
+            SoundPlayer player = new SoundPlayer(soundFilePath2);
+            player.PlaySync();
         }
 
         private static void WriteData()
