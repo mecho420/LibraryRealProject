@@ -72,26 +72,24 @@ namespace LibraryRealProject
 
         private static void ReferenceForAllUnavailiableBooksAndTheirTenants()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < bookList.Count; i++)
+            {
+                if (bookList[i].Availability == false)
+                {
+                    Console.WriteLine(bookList[i].PrintBookUnavailable());
+                }
+            }
         }
 
         private static void ReferenceForAllAvailiableBooks()
         {
-            List<Books> availiableBooks = new List<Books>();
-            Books books = new Books();
-            Books bookToBorrow = bookList.Find(b => b.Availability == true);
-            availiableBooks.Add(bookToBorrow);
-
-            for (int i = 0; i < bookList.Count(); i++)
+            for (int i = 0; i < bookList.Count; i++)
+            {
+                if (bookList[i].Availability)
                 {
-               
-                Console.WriteLine(bookToBorrow.ToString());
+                    Console.WriteLine(bookList[i].PrintBook());
                 }
-               
-            
-
-           
-            
+            }
         }
 
         private static void ReturnABoook()
@@ -107,7 +105,7 @@ namespace LibraryRealProject
                     return;
                 }
                 bookToBorrow.Availability = true;
-                bookToBorrow.borrower = "-";
+                bookToBorrow.Borrower = "-";
                 Console.WriteLine("Книгита е върната успешно");
                 WriteData();
             }
@@ -128,7 +126,7 @@ namespace LibraryRealProject
                 }
                 bookToBorrow.Availability = false;
                 Console.Write("Въведете име: ");
-                bookToBorrow.borrower = Console.ReadLine();
+                bookToBorrow.Borrower = Console.ReadLine();
                 Console.WriteLine("Книгита е заета успешно");
                 WriteData();
             }
@@ -169,7 +167,7 @@ namespace LibraryRealProject
                 newBook.author = author;
                 newBook.year = year;
                 newBook.Price = price;
-                newBook.borrower = "-";
+                newBook.Borrower = "-";
                 newBook.title = title;
                 newBook.Availability = true;
                 bookList.Add(newBook);
@@ -221,7 +219,7 @@ namespace LibraryRealProject
                     book.year = int.Parse(bookInfo[3]);
                     book.Price = decimal.Parse(bookInfo[4].Replace('.', ','));
                     book.Availability = bool.Parse(bookInfo[5]);
-                    book.borrower = bookInfo[6];
+                    book.Borrower = bookInfo[6];
 
                     bookList.Add(book);
                 }

@@ -16,7 +16,7 @@ namespace LibraryRealProject
         public string title { get;  set; }
         public int year { get;  set; }
 
-        public string borrower { get;  set; }
+        public string Borrower { get;  set; }
         public bool Availability
         {
             get
@@ -53,7 +53,7 @@ namespace LibraryRealProject
             this.isbn = isbn;
             this.title = title;
             this.year = year;
-            this.borrower = borrower;
+            this.Borrower = borrower;
             this.Availability = true;
         }
 
@@ -69,7 +69,7 @@ namespace LibraryRealProject
             this.year = year;
             this.price = price;
             this.availability = availability;
-            this.borrower = borrower;
+            this.Borrower = borrower;
         }
 
         public Books(string isbn, string title, string author, string year1)
@@ -85,7 +85,15 @@ namespace LibraryRealProject
 
         public override string ToString()
         {
-            return $"{isbn},{title},{author},{year},{this.price},{availability},{borrower}";
+            return $"{isbn},{title},{author},{year},{this.price},{availability},{Borrower}";
+        }
+        public string PrintBook()
+        {
+            return $"ISBN: {isbn}\nКнига: {title}\nАвтор: {author}\nГодина на издаване: {year}\nЦена: {this.price}\n";
+        }
+        public string PrintBookUnavailable()
+        {
+            return $"ISBN: {isbn}\nКнига: {title}\nАвтор: {author}\nГодина на издаване: {year}\nЦена: {this.price}\nЗаемател: {Borrower}\n";
         }
     }
 }
