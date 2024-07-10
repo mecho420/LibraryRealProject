@@ -60,7 +60,6 @@ namespace LibraryRealProject
 
                         break;
                 }
-
                 BackToMenu();
             }
         }
@@ -87,11 +86,6 @@ namespace LibraryRealProject
                
                 Console.WriteLine(bookToBorrow.ToString());
                 }
-               
-            
-
-           
-            
         }
 
         private static void ReturnABoook()
@@ -267,6 +261,14 @@ namespace LibraryRealProject
         {
             AddLine();
             Console.WriteLine("\t" + message);
+        }
+
+        public void CheckingBorrowersLength(string borrower)
+        {
+            if (borrower.Length <= 2)
+            {
+                Console.WriteLine("Моля въведете име по-дълго от 2 букви.");
+            }
         }
     }
 }
