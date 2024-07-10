@@ -79,11 +79,19 @@ namespace LibraryRealProject
         {
             List<Books> availiableBooks = new List<Books>();
             Books books = new Books();
-            if (books.Availability == true)
-            {
-                availiableBooks.Add(books);
-                Console.WriteLine(availiableBooks);
-            }
+            Books bookToBorrow = bookList.Find(b => b.Availability == true);
+            availiableBooks.Add(bookToBorrow);
+
+            for (int i = 0; i < bookList.Count(); i++)
+                {
+               
+                Console.WriteLine(bookToBorrow.ToString());
+                }
+               
+            
+
+           
+            
         }
 
         private static void ReturnABoook()
