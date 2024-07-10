@@ -8,7 +8,7 @@ namespace LibraryRealProject
 {
     internal class Books
     {
-        private double price;
+        private decimal price;
         public string author;
         private bool availability;
 
@@ -29,7 +29,7 @@ namespace LibraryRealProject
             }
         }
        
-        public double Price
+        public decimal Price
         {
             get
             {
@@ -61,7 +61,7 @@ namespace LibraryRealProject
         {
         }
 
-        public Books(string isbn, string title, string author, int year, double price, bool availability, string borrower)
+        public Books(string isbn, string title, string author, int year, decimal price, bool availability, string borrower)
         {
             this.isbn = isbn;
             this.title = title;

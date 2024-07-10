@@ -153,7 +153,7 @@ namespace LibraryRealProject
             Console.Write("Година на издаване: ");
             int year = int.Parse(Console.ReadLine());
             Console.Write("Цена на книгата: ");
-            double price = double.Parse(Console.ReadLine());
+            decimal price = decimal.Parse(Console.ReadLine());
             try
             {
                 Books newBook = new Books();//ako ne e null da e ""
@@ -211,7 +211,7 @@ namespace LibraryRealProject
                     book.title = bookInfo[1];
                     book.author = bookInfo[2];
                     book.year = int.Parse(bookInfo[3]);
-                    book.Price = double.Parse(bookInfo[4]);
+                    book.Price = decimal.Parse(bookInfo[4].Replace('.', ','));
                     book.Availability = bool.Parse(bookInfo[5]);
                     book.borrower = bookInfo[6];
 
